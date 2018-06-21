@@ -12,17 +12,18 @@ class CaffeineController < Sinatra::Base
 
     # Index
     get "/caffeines" do
-      "Banter"
+      erb :"caffeines/index"
     end
 
     # New
     get "/caffeines/new" do
 
+      erb :"caffeines/new"
     end
 
     # Show
     get "/caffeines/:id" do
-
+      erb :"caffeines/show"
     end
 
     # Create
@@ -32,6 +33,8 @@ class CaffeineController < Sinatra::Base
 
     # Edit
     get "/caffeines/:id/edit" do
+
+      erb :"caffeines/edit"
 
     end
     # Update
