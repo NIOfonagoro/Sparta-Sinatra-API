@@ -1,10 +1,10 @@
-<h1>You are viewing caffeine type: <%= @caffeine[:name] %></h1>
+<h1>You are viewing caffeine type: <%= @caffeine['blend_name'] %></h1>
 
-<h2><%= @caffeine[:name] %></h2>
-<h3><%= @caffeine[:city] %></h3>
-<h4><%= @caffeine[:perk] %></h4>
-<h5><%= @caffeine[:rarity] %></h5>
-<h6><%= @caffeine[:timeframe] %></h6>
+<h2><%= @caffeine["blend_name"] %></h2>
+<h3><%= @caffeine["origin"] %></h3>
+<h4><%= @caffeine["variety"] %></h4>
+<h5><%= @caffeine["notes"] %></h5>
+<h6><%= @caffeine["intensifier"] %></h6>
 
-<a href="/caffeines/<%= @caffeine[:id] %>/edit">Edit</a>
+<a href="/caffeines/<%#= @caffeine["id"] %>/edit">Edit</a>
 This is the finest caffeines of all

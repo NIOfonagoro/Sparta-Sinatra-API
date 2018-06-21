@@ -1,13 +1,22 @@
 <h1>Index</h1>
 
-Hello Welcome to Caffeine
+<h2>Hello Welcome to Caffeine</h2>
 
-<% @caffeines.each do |caffeine| %>
-  <h2><%= caffeine[:name] %></h2>
-  <a href="/caffeines/<%= caffeine[:id] %>">See More</a>
+<% @caffeines['data'].each do |caffeine| %>
+  <p><strong>ID no. </strong><%= caffeine['id'] %></p>
+  <p><strong>Blend Name: </strong><%= caffeine['blend_name'] %></p>
+  <p><strong>Origin: </strong><%= caffeine['origin'] %></p>
+  <p><strong>Variety: </strong><%= caffeine['variety'] %> <br></p>
+  <p><strong>Notes: </strong><%= caffeine['notes'] %> <br></p>
+  <p><strong>Intensifier: </strong><%= caffeine['intensifier'] %> <br></p>
 
-  <form action="/caffeienes/<%= caffeine[:id] %>" method="post">
-    <input type="submit"  value="delete">
-    <input type="hidden" name="_method" value="DELETE">
-  </form>
+  <h2><%= @caffeines['blend_name'] %></h2>
+    <a href="/caffeines/<%= caffeine['id'] %>">See More</a>
+
+    <form action="/caffeines/<%= caffeine['id'] %>" method="post">
+      <input type="submit"  value="delete">
+      <input type="hidden" name="_method" value="DELETE">
+    </form>
+    <br>
+
 <% end %>

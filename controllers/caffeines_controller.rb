@@ -1,3 +1,5 @@
+require 'httparty'
+
 class CaffeineController < Sinatra::Base
   # sets root as the parent-directory of the current file
   set :root, File.join(File.dirname(__FILE__), '..')
@@ -10,37 +12,39 @@ class CaffeineController < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  $caffeines = [
-    {
-      :id => 0,
-      :name => 'Cappucino',
-      :city => 'Wakanda',
-      :perks => 'Vibranium suit',
-      :rarity => 'Very Rare',
-      :timeframe => 'All Day'
-    },
-    {
-      :id => 1,
-      :name => 'Mocha',
-      :city => 'Washington DC',
-      :perks => 'Super soldier',
-      :rarity => 'Common',
-      :timeframe => 'Evening'
-    },
-    {
-      :id => 2,
-      :name => 'Espresso',
-      :city => 'New York',
-      :perks => 'Agility, Strength',
-      :rarity => 'Medium',
-      :timeframe => 'Morning'
-    }
-  ]
+  # $caffeines = [
+  #   {
+  #     :id => 0,
+  #     :name => 'Cappucino',
+  #     :city => 'Wakanda',
+  #     :perks => 'Vibranium suit',
+  #     :rarity => 'Very Rare',
+  #     :timeframe => 'All Day'
+  #   },
+  #   {
+  #     :id => 1,
+  #     :name => 'Mocha',
+  #     :city => 'Washington DC',
+  #     :perks => 'Super soldier',
+  #     :rarity => 'Common',
+  #     :timeframe => 'Evening'
+  #   },
+  #   {
+  #     :id => 2,
+  #     :name => 'Espresso',
+  #     :city => 'New York',
+  #     :perks => 'Agility, Strength',
+  #     :rarity => 'Medium',
+  #     :timeframe => 'Morning'
+  #   }
+  # ]
 
   # Index
   get "/caffeines" do
 
-    @caffeines = $caffeines
+    # @caffeines = $caffeines
+    @caffeines = HTTParty.get('https://serene-reef-18451.herokuapp.com/api/v1/caffeines')
+    # puts response
     erb :"caffeines/index"
 
   end
@@ -65,7 +69,13 @@ class CaffeineController < Sinatra::Base
 
     id = params[:id].to_i
 
-    @caffeine = $caffeines[id]
+    response = HTTParty.get('https://serene-reef-18451.herokuapp.com/api/v1/caffeines')['data']
+
+    response.each do |data|
+      if data['id'] == id
+        @caffeine = data
+      end
+    end
 
     erb :"caffeines/show"
   end
@@ -73,10 +83,12 @@ class CaffeineController < Sinatra::Base
   # Create
   post "/caffeines/" do
     new_caffeine = {
-      :id => $heroes.last[:id] + 1,
+      :id => $caffeine.last[:id] + 1,
       :name => params[:name],
       :city => params[:city],
-      :abilities => params[:abilities]
+      :perks => params[:perks],
+      :rarity => params[:rarity],
+      :timeframe => params[:timeframe]
     }
 
     $heroes.push new_hero
@@ -95,7 +107,7 @@ class CaffeineController < Sinatra::Base
 
   end
   # Destroy
-  delete "caffeienes/:id" do
+  delete "caffeines/:id" do
 
   end
 end
