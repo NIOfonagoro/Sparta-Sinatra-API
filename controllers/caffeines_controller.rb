@@ -7,8 +7,13 @@ class CaffeineController < Sinatra::Base
 
     # Turn on Sinatra Reloader
     configure :development do
-        register Sinatra::Reloader
+      register Sinatra::Reloader
     end
+
+
+
+
+
 
     # Index
     get "/caffeines" do
