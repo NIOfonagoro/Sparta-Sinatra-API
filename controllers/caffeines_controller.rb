@@ -72,7 +72,16 @@ class CaffeineController < Sinatra::Base
 
   # Create
   post "/caffeines/" do
+    new_caffeine = {
+      :id => $heroes.last[:id] + 1,
+      :name => params[:name],
+      :city => params[:city],
+      :abilities => params[:abilities]
+    }
 
+    $heroes.push new_hero
+
+    redirect '/heroes'
   end
 
   # Edit
