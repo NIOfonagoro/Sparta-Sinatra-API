@@ -1,0 +1,29 @@
+<form action="/caffeines/<%= @caffeine['id'] %>" method="post">
+  <div>
+    <label for="name">Caffeine Name</label>
+    <input type="text" name="name" value="<%= @caffeine['name'] %>">
+  </div>
+  <div>
+    <label for="city">Caffeine City</label>
+    <input type="text" name="city" value="<%= @caffeine['city'] %>">
+  </div>
+  <div>
+    <label for="perks">Expected Perk</label>
+    <input type="text" name="perks"><%= @caffeine['perks'] %></input>
+  </div>
+  <div>
+    <label for="rarity">Rarity level</label>
+    <input type="text" name="rarity"><%= @caffeine['rarity'] %></input>
+  </div>
+  <div>
+    <label for="timeframe">Timeframe</label>
+    <input type="text" name="timeframe"><%= @caffeine['timeframe'] %></input>
+  </div>
+  <input type="submit" value="Submit">
+
+  <% if (@caffeine['id']) %>
+    <!-- Method Override -->
+    <input type="hidden" name="_method" value="PUT">
+  <% end %>
+
+</form>

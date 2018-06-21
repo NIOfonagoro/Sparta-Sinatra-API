@@ -1,53 +1,92 @@
 class CaffeineController < Sinatra::Base
   # sets root as the parent-directory of the current file
-    set :root, File.join(File.dirname(__FILE__), '..')
+  set :root, File.join(File.dirname(__FILE__), '..')
 
-    # sets the view directory correctly
-    set :views, Proc.new { File.join(root, "views") }
+  # sets the view directory correctly
+  set :views, Proc.new { File.join(root, "views") }
 
-    # Turn on Sinatra Reloader
-    configure :development do
-      register Sinatra::Reloader
-    end
+  # Turn on Sinatra Reloader
+  configure :development do
+    register Sinatra::Reloader
+  end
 
+  $caffeines = [
+    {
+      :id => 0,
+      :name => 'Cappucino',
+      :city => 'Wakanda',
+      :perks => 'Vibranium suit',
+      :rarity => 'Very Rare',
+      :timeframe => 'All Day'
+    },
+    {
+      :id => 1,
+      :name => 'Mocha',
+      :city => 'Washington DC',
+      :perks => 'Super soldier',
+      :rarity => 'Common',
+      :timeframe => 'Evening'
+    },
+    {
+      :id => 2,
+      :name => 'Espresso',
+      :city => 'New York',
+      :perks => 'Agility, Strength',
+      :rarity => 'Medium',
+      :timeframe => 'Morning'
+    }
+  ]
 
+  # Index
+  get "/caffeines" do
 
+    @caffeines = $caffeines
+    erb :"caffeines/index"
 
+  end
 
+  # New
+  get "/caffeines/new" do
 
-    # Index
-    get "/caffeines" do
-      erb :"caffeines/index"
-    end
+    @caffeine = {
+      :id => '',
+      :name => '',
+      :city => '',
+      :perks => '',
+      :rarity => '',
+      :timeframe => ''
+    }
 
-    # New
-    get "/caffeines/new" do
+    erb :"caffeines/new"
+  end
 
-      erb :"caffeines/new"
-    end
+  # Show
+  get "/caffeines/:id" do
 
-    # Show
-    get "/caffeines/:id" do
-      erb :"caffeines/show"
-    end
+    id = params[:id].to_i
 
-    # Create
-    post "/caffeines" do
+    @caffeine = $caffeines[id]
 
-    end
+    erb :"caffeines/show"
+  end
 
-    # Edit
-    get "/caffeines/:id/edit" do
+  # Create
+  post "/caffeines/" do
 
-      erb :"caffeines/edit"
+  end
 
-    end
-    # Update
-    put "/caffeines/:id" do
+  # Edit
+  get "/caffeines/:id/edit" do
 
-    end
-    # Destroy
-    delete "caffeienes/:id" do
+    erb :"caffeines/edit"
 
-    end
+  end
+  # Update
+  put "/caffeines/:id" do
+
+  end
+  # Destroy
+  delete "caffeienes/:id" do
+
+  end
 end

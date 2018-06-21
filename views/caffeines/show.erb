@@ -1,3 +1,10 @@
-<h1>You are viewing caffeine type: </h1>
+<h1>You are viewing caffeine type: <%= @caffeine[:name] %></h1>
 
+<h2><%= @caffeine[:name] %></h2>
+<h3><%= @caffeine[:city] %></h3>
+<h4><%= @caffeine[:perk] %></h4>
+<h5><%= @caffeine[:rarity] %></h5>
+<h6><%= @caffeine[:timeframe] %></h6>
+
+<a href="/caffeines/<%= @caffeine[:id] %>/edit">Edit</a>
 This is the finest caffeines of all
