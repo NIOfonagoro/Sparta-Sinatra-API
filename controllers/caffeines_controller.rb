@@ -10,9 +10,39 @@ class CaffeineController < Sinatra::Base
         register Sinatra::Reloader
     end
 
+    $caffeines = [
+    {
+      :id => 0,
+      :name => 'Cappucino',
+      :city => 'Wakanda',
+      :perks => 'Vibranium suit',
+      :rarity => 'Very Rare',
+      :timeframe => 'All Day'
+    },
+    {
+      :id => 1,
+      :name => 'Mocha',
+      :city => 'Washington DC',
+      :perks => 'Super soldier',
+      :rarity => 'Common',
+      :timeframe => 'Evening'
+    },
+    {
+      :id => 2,
+      :name => 'Espresso',
+      :city => 'New York',
+      :perks => 'Agility, Strength',
+      :rarity => 'Medium',
+      :timeframe => 'Morning'
+    }
+  ]
+
     # Index
     get "/caffeines" do
+
+      @caffeines = $caffeines
       erb :"caffeines/index"
+
     end
 
     # New
@@ -23,6 +53,11 @@ class CaffeineController < Sinatra::Base
 
     # Show
     get "/caffeines/:id" do
+
+      id = params[:id].to_i
+
+      @caffeine = $caffeines[id]
+
       erb :"caffeines/show"
     end
 

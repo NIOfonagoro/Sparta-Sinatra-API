@@ -1,3 +1,13 @@
 <h1>Index</h1>
 
 Hello Welcome to Caffeine
+
+<% @caffeines.each do |caffeine| %>
+  <h2><%= caffeine[:name] %></h2>
+  <a href="/caffeines/<%= caffeine[:id] %>">See More</a>
+
+  <form action="/caffeienes/<%= caffeine[:id] %>" method="post">
+    <input type="submit"  value="delete">
+    <input type="hidden" name="_method" value="DELETE">
+  </form>
+<% end %>
